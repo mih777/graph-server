@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const keys = require('./config/keys')
+const GraphRouter = require('./routes/graph')
 const ToDoRouter = require('./routes/todo')
 
 const app = express()
@@ -23,6 +24,7 @@ app.use(cors())
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
 
+app.use('/api/graph', GraphRouter)
 app.use('/api/todos', ToDoRouter)
 
 
