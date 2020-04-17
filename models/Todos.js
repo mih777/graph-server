@@ -8,20 +8,16 @@ const todoSchema = new Schema({
         required: 'Enter a name of todo'
     },    
     description: {
-        type: String,
-        required: 'Enter a description of todo'
+        type: String
     },
     category: {
-        type: String,
-        required: 'Enter category'
+        type: String
     },
     completed: {
-        type: Boolean,
-        required: 'completed'
+        type: Boolean
     },
     expired: {
-        type: Boolean,
-        required: 'expired'
+        type: Boolean
     },
     created_date: {
         type: Date,
