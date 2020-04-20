@@ -5,6 +5,8 @@ const cors = require('cors')
 const keys = require('./config/keys')
 const GraphRouter = require('./routes/graph')
 const ToDoRouter = require('./routes/todo')
+const TaskRouter = require('./routes/advanced-todolist/task')
+const CategoryRouter = require('./routes/advanced-todolist/category')
 
 const app = express()
 
@@ -26,6 +28,8 @@ app.use(bodyParser.json())
 
 app.use('/api/graph', GraphRouter)
 app.use('/api/todos', ToDoRouter)
+app.use('/api/tasks', TaskRouter)
+app.use('/api/categories', CategoryRouter)
 
 
 if(process.env.NODE_ENV === 'production') {
