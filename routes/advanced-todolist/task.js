@@ -4,7 +4,7 @@ const router = express.Router()
 
 router.get('/', controller.getAllTasks)
 // router.get('/:id', controller.getOneById)
-// router.get('/cat/:category', controller.getByCategory)
+router.get('/cat/:category', controller.getTasksByCategory)
 router.post('/create', controller.createTask)
 router.delete('/delete/:id', controller.deleteTask)
 // router.put('/update/:id', controller.updateTodo)

@@ -34,6 +34,26 @@ module.exports.getAllTasks = async (req, res) => {
 
 }
 
+module.exports.getTasksByCategory = async(req, res) => {
+    
+    try {
+        await Task.find({category: req.params.category}, (err, tasks) => {   
+            if(err){
+                res.send(err)
+            }
+            res.setHeader('Access-Control-Allow-Origin', '*');
+            res.setHeader('Access-Control-Allow-Headers', 'origin, content-type, accept');
+            res.json(tasks)
+
+        })
+        
+    } catch(e) {
+        res.send(e)
+    }
+
+}
+
+
 
 // module.exports.getOneById = async(req,res) => {
 //     const id = req.params.id
