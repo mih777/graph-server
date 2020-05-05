@@ -10,7 +10,7 @@ const productSchema = new Schema({
         type: String,
         required: 'Enter a name of todo'
     },    
-    photo: {
+    imageSrc: {
         type: String,
         default: ''
     },
@@ -18,7 +18,7 @@ const productSchema = new Schema({
         type: String
     },
     price: {
-        type: Number
+        type: String
     },
     created_date: {
         type: Date,

@@ -1,19 +1,62 @@
 const Product = require('../../models/onlineshop/Product')
 
-module.exports.create = async(req,res) => {
+// module.exports.create = async(req,res) => {
     
-    let product = new Product(req.body)
+//     let product = new Product(req.body)
     
-        await product.save((err, product) => {
-            if(err) {
-                res.send(err)
-            }
-            res.setHeader('Access-Control-Allow-Origin', '*');
-            res.setHeader('Access-Control-Allow-Headers', 'origin, content-type, accept');
-            res.json({ message: 'product created !', product })
-        })
+//         await product.save((err, product) => {
+//             if(err) {
+//                 res.send(err)
+//             }
+//             res.setHeader('Access-Control-Allow-Origin', '*');
+//             res.setHeader('Access-Control-Allow-Headers', 'origin, content-type, accept');
+//             res.status(201).json({ message: 'product created !', product })
+//         })
         
+// }
+
+module.exports.create = async function(req, res) {
+    const product = new Product({
+      title: req.body.title,
+      category: req.body.category,
+      info: req.body.info,
+      price: req.body.price,
+      imageSrc: req.file ? req.file.path : ''
+    })
+  
+    try {
+      await product.save()
+      res.status(201).json({message: 'Product created !',product})
+    } catch (e) {
+      errorHandler(res, e)
     }
+  }
+
+// module.exports.create = async function(req, res) {
+//     const product = new Product({
+//       category: req.body.category,
+//       title: req.body.title,
+//       imageSrc: req.file ? req.file.path : '',
+//       //image: req.body.image,
+//       info: req.body.info,
+//       price: req.body.price
+//     })
+  
+//     try {
+//         await product.save((err, product) => {
+//             if(err) {
+//                 res.send(err)
+//             }
+//             console.log(req.file.path)
+//             res.setHeader('Access-Control-Allow-Origin', '*');
+//             res.setHeader('Access-Control-Allow-Headers', 'origin, content-type, accept');
+//             res.status(201).json({ message: 'product created !', product })
+//         })
+
+//     } catch (e) {
+//       //errorHandler(res, e)
+//     }
+// }
 
 module.exports.getAllProducts = async (req, res) => {
 
