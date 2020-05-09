@@ -9,6 +9,7 @@ const GraphRouter = require('./routes/graph')
 const ToDoRouter = require('./routes/todo')
 const TaskRouter = require('./routes/advanced-todolist/task')
 const CategoryRouter = require('./routes/advanced-todolist/category')
+const MyTodoRouter = require('./routes/mytodolist/myTodoRouter')
 
 const app = express()
 
@@ -29,6 +30,8 @@ app.use('/uploads', express.static('uploads'))
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
 
+
+app.use('/api/mytodos', MyTodoRouter)
 app.use('/api/auth', authRoutes)
 app.use('/api/products', ProductRouter)
 app.use('/api/graph', GraphRouter)

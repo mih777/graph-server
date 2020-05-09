@@ -1,19 +1,5 @@
 const Product = require('../../models/onlineshop/Product')
 
-// module.exports.create = async(req,res) => {
-    
-//     let product = new Product(req.body)
-    
-//         await product.save((err, product) => {
-//             if(err) {
-//                 res.send(err)
-//             }
-//             res.setHeader('Access-Control-Allow-Origin', '*');
-//             res.setHeader('Access-Control-Allow-Headers', 'origin, content-type, accept');
-//             res.status(201).json({ message: 'product created !', product })
-//         })
-        
-// }
 
 module.exports.create = async function(req, res) {
     const product = new Product({
@@ -32,31 +18,6 @@ module.exports.create = async function(req, res) {
     }
   }
 
-// module.exports.create = async function(req, res) {
-//     const product = new Product({
-//       category: req.body.category,
-//       title: req.body.title,
-//       imageSrc: req.file ? req.file.path : '',
-//       //image: req.body.image,
-//       info: req.body.info,
-//       price: req.body.price
-//     })
-  
-//     try {
-//         await product.save((err, product) => {
-//             if(err) {
-//                 res.send(err)
-//             }
-//             console.log(req.file.path)
-//             res.setHeader('Access-Control-Allow-Origin', '*');
-//             res.setHeader('Access-Control-Allow-Headers', 'origin, content-type, accept');
-//             res.status(201).json({ message: 'product created !', product })
-//         })
-
-//     } catch (e) {
-//       //errorHandler(res, e)
-//     }
-// }
 
 module.exports.getAllProducts = async (req, res) => {
 
