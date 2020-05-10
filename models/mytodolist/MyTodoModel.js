@@ -7,10 +7,12 @@ const mytodoSchema = new Schema({
         type: String,
         required: 'Enter a name of todo'
     },    
-    description: {
+    
+    category: {
         type: String
     },
-    category: {
+
+    description: {
         type: String
     },
     completed: {
