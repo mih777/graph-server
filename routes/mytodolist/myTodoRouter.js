@@ -1,6 +1,10 @@
 const express = require('express')
+const category_controller = require('../../controllers/mytodolist/todoCategoryController')
 const controller = require('../../controllers/mytodolist/myTodoController')
 const router = express.Router()
+
+router.post('/create-category', category_controller.create)
+router.get('/categories', category_controller.getAllCategories)
 
 router.get('/', controller.getAllTodos)
 router.get('/:id', controller.getOneById)
