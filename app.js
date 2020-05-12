@@ -7,9 +7,8 @@ const authRoutes = require('./routes/onlineshop/auth')
 const ProductRouter = require('./routes/onlineshop/product')
 const GraphRouter = require('./routes/graph')
 const ToDoRouter = require('./routes/todo')
-const TaskRouter = require('./routes/advanced-todolist/task')
-const CategoryRouter = require('./routes/advanced-todolist/category')
-const MyTodoRouter = require('./routes/mytodolist/myTodoRouter')
+const CategoryRouter = require('./routes/mytodos/mytodoRoutes')
+const MyTodoRouter = require('./routes/mytodos/mytodoRoutes')
 
 const app = express()
 
@@ -31,13 +30,13 @@ app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
 
 
-app.use('/api/mytodos', MyTodoRouter)
 app.use('/api/auth', authRoutes)
 app.use('/api/products', ProductRouter)
 app.use('/api/graph', GraphRouter)
 app.use('/api/todos', ToDoRouter)
-app.use('/api/tasks', TaskRouter)
-app.use('/api/categories', CategoryRouter)
+
+app.use('/api/mytodos', MyTodoRouter)
+app.use('/api/mytodo-categories', CategoryRouter)
 
 
 if(process.env.NODE_ENV === 'production') {

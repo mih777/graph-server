@@ -1,6 +1,6 @@
-const Todo = require('../../models/mytodolist/MyTodoModel')
+const Todo = require('../../models/mytodos/MyTodoModel')
 
-module.exports.create = async(req,res) => {
+module.exports.createTodo = async(req,res) => {
     
     let todo = new Todo(req.body)
     
@@ -34,7 +34,7 @@ module.exports.getAllTodos = async (req, res) => {
 }
 
 
-module.exports.getOneById = async(req,res) => {
+module.exports.getOneTodoById = async(req,res) => {
     const id = req.params.id
     await Todo.findOne({_id: id}, function(err, todo){
         
@@ -47,7 +47,7 @@ module.exports.getOneById = async(req,res) => {
     });
 }
                        
-module.exports.getByCategory = async(req, res) => {
+module.exports.getTodoByCategory = async(req, res) => {
     
     try {
         await Todo.find({category: req.params.category}, (err, todo) => {   
@@ -71,8 +71,7 @@ module.exports.updateTodo = async(req, res) => {
         title: req.body.title,
         category: req.body.category,
         description: req.body.description,
-        completed: req.body.completed,
-        
+        completed: req.body.completed
     }
 
     try {
@@ -89,8 +88,7 @@ module.exports.updateTodo = async(req, res) => {
 
 module.exports.updateCompleted = async(req, res) => {
     const updated = {
-        completed: req.body.completed,
-        //expired: req.body.expired
+        completed: req.body.completed
     }
 
     try {
@@ -105,8 +103,6 @@ module.exports.updateCompleted = async(req, res) => {
     }
 }
 
-
-
 module.exports.deleteTodo = async (req, res) => {
     await Todo.deleteOne({ _id: req.params.id }, (err, todo) => {
         if(err){
@@ -117,20 +113,3 @@ module.exports.deleteTodo = async (req, res) => {
         res.json({ message: 'Successfully deleted todo!'})
     })
 }
-
-// module.exports.updateExpire = async(req, res) => {
-//     const updated = {
-//         expired: req.body.expired
-//     }
-
-//     try {
-//     const todo = await Todo.findOneAndUpdate(
-//         {_id: req.params.id},
-//         {$set: updated},
-//         {new: true}
-//     )
-//         res.status(200).json(todo)
-//     } catch (e) {
-//         console.log(res, e)
-//     }
-// }

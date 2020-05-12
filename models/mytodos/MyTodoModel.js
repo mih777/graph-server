@@ -1,24 +1,20 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
-const mytodoSchema = new Schema({
+const mytodosSchema = new Schema({
 
     title: {
-        type: String,
-        required: 'Enter a name of todo'
+        type: String
     },    
-    
-    category: {
+    description: {
         type: String
     },
-
-    description: {
+    category: {
         type: String
     },
     completed: {
         type: Boolean
     },
-    
     created_date: {
         type: Date,
         default: Date.now
@@ -27,4 +23,4 @@ const mytodoSchema = new Schema({
 })
 
 
-module.exports = mongoose.model('mytodos', mytodoSchema)
+module.exports = mongoose.model('mytodos', mytodosSchema)
