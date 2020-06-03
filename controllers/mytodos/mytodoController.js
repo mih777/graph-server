@@ -18,8 +18,7 @@ module.exports.createTodo = async(req,res) => {
         
     }
 
-module.exports.getAllTodos = async (req, res) => {
-
+module.exports.getAllTodosNoParams = async (req, res) => {
 
     await Todo.find({}, (err, todos) => {   
         if(err){
@@ -29,7 +28,72 @@ module.exports.getAllTodos = async (req, res) => {
         res.setHeader('Access-Control-Allow-Headers', 'origin, content-type, accept');
         res.json(todos)
 
-    }).sort({ _id: -1 })
+    })
+
+} 
+
+module.exports.getTodoByCategoryNoParams = async(req, res) => {
+    
+    try {
+        await Todo.find({category: req.params.category}, (err, todo) => {   
+            if(err){
+                res.send(err)
+            }
+            res.setHeader('Access-Control-Allow-Origin', '*');
+            res.setHeader('Access-Control-Allow-Headers', 'origin, content-type, accept');
+            res.json(todo)
+
+        })
+
+        
+    } catch(e) {
+        res.send(e)
+    }
+
+}
+
+module.exports.getAllTodos = async (req, res) => {
+
+    const pagination = req.query.pagination ? parseInt(req.query.pagination) : 3
+    const page = req.query.page ? parseInt(req.query.page) : 1
+
+    await Todo.find({}, (err, todos) => {   
+        if(err){
+            res.send(err)
+        }
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        res.setHeader('Access-Control-Allow-Headers', 'origin, content-type, accept');
+        res.json(todos)
+
+    })
+    .sort({ _id: -1 })
+    .skip((page - 1) * pagination)
+    .limit(pagination)
+
+}
+
+module.exports.getTodoByCategory = async(req, res) => {
+
+    const pagination = req.query.pagination ? parseInt(req.query.pagination) : 3
+    const page = req.query.page ? parseInt(req.query.page) : 1
+    
+    try {
+        await Todo.find({category: req.params.category}, (err, todo) => {   
+            if(err){
+                res.send(err)
+            }
+            res.setHeader('Access-Control-Allow-Origin', '*');
+            res.setHeader('Access-Control-Allow-Headers', 'origin, content-type, accept');
+            res.json(todo)
+
+        })
+        .sort({ _id: -1 })
+        .skip((page - 1) * pagination)
+        .limit(pagination)
+        
+    } catch(e) {
+        res.send(e)
+    }
 
 }
 
@@ -47,16 +111,18 @@ module.exports.getOneTodoById = async(req,res) => {
     });
 }
                        
-module.exports.getTodoByCategory = async(req, res) => {
+
+
+module.exports.deleteTodoByCategory = async(req, res) => {
     
     try {
-        await Todo.find({category: req.params.category}, (err, todo) => {   
+        await Todo.deleteMany({category: req.params.category}, (err, todo) => {   
             if(err){
                 res.send(err)
             }
             res.setHeader('Access-Control-Allow-Origin', '*');
             res.setHeader('Access-Control-Allow-Headers', 'origin, content-type, accept');
-            res.json(todo)
+            res.json({ message: 'Successfully deleted todos!'})
 
         })
         
@@ -64,6 +130,17 @@ module.exports.getTodoByCategory = async(req, res) => {
         res.send(e)
     }
 
+}
+
+module.exports.deleteTodo = async (req, res) => {
+    await Todo.deleteOne({ _id: req.params.id }, (err, todo) => {
+        if(err){
+            res.send(err);
+        }
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        res.setHeader('Access-Control-Allow-Headers', 'origin, content-type, accept')
+        res.json({ message: 'Successfully deleted todo!'})
+    })
 }
 
 module.exports.updateTodo = async(req, res) => {
@@ -101,15 +178,4 @@ module.exports.updateCompleted = async(req, res) => {
     } catch (e) {
         console.log(res, e)
     }
-}
-
-module.exports.deleteTodo = async (req, res) => {
-    await Todo.deleteOne({ _id: req.params.id }, (err, todo) => {
-        if(err){
-            res.send(err);
-        }
-        res.setHeader('Access-Control-Allow-Origin', '*');
-        res.setHeader('Access-Control-Allow-Headers', 'origin, content-type, accept')
-        res.json({ message: 'Successfully deleted todo!'})
-    })
 }

@@ -13,13 +13,12 @@ module.exports.create = async(req,res) => {
             res.json({
                 message: 'todo created !', todo
             })
-            //res.json(todo)
+            
         })
         
     }
 
-module.exports.getAllTodos = async (req, res) => {
-
+module.exports.getAllTodosNoParams = async (req, res) => {
 
     await Todo.find({}, (err, todos) => {   
         if(err){
@@ -27,9 +26,30 @@ module.exports.getAllTodos = async (req, res) => {
         }
         res.setHeader('Access-Control-Allow-Origin', '*');
         res.setHeader('Access-Control-Allow-Headers', 'origin, content-type, accept');
-        res.json(todos)
+        res.status(200).json(todos)
+    
+    })
+        .sort({ _id: -1 })
 
-    }).sort({ _id: -1 })
+}    
+
+module.exports.getAllTodos = async (req, res) => {
+
+    const pagination = req.query.pagination ? parseInt(req.query.pagination) : 3
+    const page = req.query.page ? parseInt(req.query.page) : 1
+
+    await Todo.find({}, (err, todos) => {   
+        if(err){
+            res.send(err)
+        }
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        res.setHeader('Access-Control-Allow-Headers', 'origin, content-type, accept');
+        res.status(200).json(todos)
+    
+    })
+        .sort({ _id: -1 })
+        .skip((page - 1) * pagination)
+        .limit(pagination)
 
 }
 

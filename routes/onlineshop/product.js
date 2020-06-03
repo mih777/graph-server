@@ -7,7 +7,7 @@ router.get('/', controller.getAllProducts)
 router.get('/:id', controller.getOneById)
 router.get('/cat/:category', controller.getByCategory)
 router.post('/create',upload.single('image'), controller.create)
-//router.delete('/delete/:id', controller.deleteTodo)
+router.delete('/delete/:id', controller.deleteProduct)
 router.put('/update/:id',upload.single('image'), controller.updateProduct)
 
 

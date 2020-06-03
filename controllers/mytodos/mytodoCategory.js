@@ -47,13 +47,13 @@ module.exports.getOneById = async(req,res) => {
     });
 }
 
-// module.exports.deleteTodo = async (req, res) => {
-//     await Category.deleteOne({ _id: req.params.id }, (err, todo) => {
-//         if(err){
-//             res.send(err);
-//         }
-//         res.setHeader('Access-Control-Allow-Origin', '*');
-//         res.setHeader('Access-Control-Allow-Headers', 'origin, content-type, accept')
-//         res.json({ message: 'Successfully deleted todo!'})
-//     })
-// }
+module.exports.deleteCategory = async (req, res) => {
+    await Category.deleteOne({ _id: req.params.id }, (err, todo) => {
+        if(err){
+            res.send(err);
+        }
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        res.setHeader('Access-Control-Allow-Headers', 'origin, content-type, accept')
+        res.json({ message: 'Successfully deleted category!'})
+    })
+}

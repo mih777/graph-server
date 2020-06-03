@@ -16,7 +16,29 @@ module.exports.create = async function(req, res) {
     } catch (e) {
       errorHandler(res, e)
     }
-  }
+}
+
+module.exports.updateProduct = async(req, res) => {
+    const updated = {
+        category: req.body.category,
+        title: req.body.title,
+        photo: req.body.photo,
+        info: req.body.info,
+        price: req.body.price,
+        imageSrc: req.file ? req.file.path : ''
+    }
+
+    try {
+    const product = await Product.findOneAndUpdate(
+        {_id: req.params.id},
+        {$set: updated},
+        {new: true}
+    )
+        res.status(200).json(product)
+    } catch (e) {
+        console.log(res, e)
+    }
+}  
 
 
 module.exports.getAllProducts = async (req, res) => {
@@ -67,69 +89,14 @@ module.exports.getByCategory = async(req, res) => {
 
 }
 
-module.exports.updateProduct = async(req, res) => {
-    const updated = {
-        category: req.body.category,
-        title: req.body.title,
-        photo: req.body.photo,
-        info: req.body.info,
-        price: req.body.price
-    }
 
-    try {
-    const product = await Product.findOneAndUpdate(
-        {_id: req.params.id},
-        {$set: updated},
-        {new: true}
-    )
-        res.status(200).json(product)
-    } catch (e) {
-        console.log(res, e)
-    }
+module.exports.deleteProduct = async (req, res) => {
+    await Product.deleteOne({ _id: req.params.id }, (err, product) => {
+        if(err){
+            res.send(err);
+        }
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        res.setHeader('Access-Control-Allow-Headers', 'origin, content-type, accept')
+        res.json({ message: 'Successfully deleted product!'})
+    })
 }
-
-// module.exports.updateCompleted = async(req, res) => {
-//     const updated = {
-//         completed: req.body.completed,
-//         //expired: req.body.expired
-//     }
-
-//     try {
-//     const todo = await Todo.findOneAndUpdate(
-//         {_id: req.params.id},
-//         {$set: updated},
-//         {new: true}
-//     )
-//         res.status(200).json(todo)
-//     } catch (e) {
-//         console.log(res, e)
-//     }
-// }
-
-// module.exports.updateExpire = async(req, res) => {
-//     const updated = {
-//         expired: req.body.expired
-//     }
-
-//     try {
-//     const todo = await Todo.findOneAndUpdate(
-//         {_id: req.params.id},
-//         {$set: updated},
-//         {new: true}
-//     )
-//         res.status(200).json(todo)
-//     } catch (e) {
-//         console.log(res, e)
-//     }
-// }
-
-// module.exports.deleteTodo = async (req, res) => {
-//     await Todo.deleteOne({ _id: req.params.id }, (err, todo) => {
-//         if(err){
-//             res.send(err);
-//         }
-//         res.setHeader('Access-Control-Allow-Origin', '*');
-//         res.setHeader('Access-Control-Allow-Headers', 'origin, content-type, accept')
-//         res.json({ message: 'Successfully deleted todo!'})
-//     })
-// }
