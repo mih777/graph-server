@@ -9,6 +9,7 @@ const GraphRouter = require('./routes/graph')
 const ToDoRouter = require('./routes/todo')
 const CategoryRouter = require('./routes/mytodos/mytodoRoutes')
 const MyTodoRouter = require('./routes/mytodos/mytodoRoutes')
+const DebtRouter = require('./routes/debt-route/debt-route')
 
 const app = express()
 
@@ -34,7 +35,7 @@ app.use('/api/auth', authRoutes)
 app.use('/api/products', ProductRouter)
 app.use('/api/graph', GraphRouter)
 app.use('/api/todos', ToDoRouter)
-
+app.use('/api/debt', DebtRouter)
 app.use('/api/mytodos', MyTodoRouter)
 app.use('/api/mytodo-categories', CategoryRouter)
 
