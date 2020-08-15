@@ -18,8 +18,9 @@ module.exports.create = async(req,res) => {
         
 }
 
-module.exports.getAllDays = async(req,res) => {
-    await Calc.find( function(err, debt){
+module.exports.getOneById = async(req,res) => {
+    const id = req.params.id
+    await Calc.findOne({_id: id}, function(err, debt){
         
         
         if(err) return console.log(err);
@@ -29,19 +30,6 @@ module.exports.getAllDays = async(req,res) => {
         res.json(debt)
     });
 }
-
-// module.exports.getOneById = async(req,res) => {
-//     const id = req.params.id
-//     await Calc.findOne({_id: id}, function(err, debt){
-        
-        
-//         if(err) return console.log(err);
-        
-//         res.setHeader('Access-Control-Allow-Origin', '*');
-//         res.setHeader('Access-Control-Allow-Headers', 'origin, content-type, accept');
-//         res.json(debt)
-//     });
-// }
 
 module.exports.update = async (req, res) => {
     const updated = {

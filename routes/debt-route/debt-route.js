@@ -9,7 +9,7 @@ router.post('/create', controller.create)
 router.put('/update/:id', controller.update)
 
 //  /api/debt/get/debt/:id
-router.get('/get/debt/:id', controller.getOneById)
+router.get('/get/debt', controller.getAllDays)
 
 
 module.exports = router
