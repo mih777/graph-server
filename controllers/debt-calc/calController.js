@@ -27,7 +27,8 @@ module.exports.getAllDays = async(req,res) => {
         res.setHeader('Access-Control-Allow-Origin', '*');
         res.setHeader('Access-Control-Allow-Headers', 'origin, content-type, accept');
         res.json(debt)
-    });
+    })
+    .sort({ _id: -1 })
 }
 
 // module.exports.getOneById = async(req,res) => {
