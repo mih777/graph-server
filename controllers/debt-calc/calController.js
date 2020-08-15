@@ -46,7 +46,8 @@ module.exports.getAllDays = async(req,res) => {
 module.exports.update = async (req, res) => {
     const updated = {
         hours: req.body.hours,
-        minutes: req.body.minutes
+        minutes: req.body.minutes,
+        overtime: req.body.overtime
     }
 
     try {

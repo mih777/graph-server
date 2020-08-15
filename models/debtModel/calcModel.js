@@ -10,6 +10,9 @@ const debtSchema = new Schema({
     minutes: {
         type: Number
     },
+    overtime: {
+        type: Number
+    },
     date: {
         type: Date,
         default: Date.now
