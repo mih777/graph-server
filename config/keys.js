@@ -1,6 +1,6 @@
 module.exports = {
   
-  mongoURI: 'mongodb://mih777:mih777@ds149511.mlab.com:49511/graph777',
+  mongoURI: 'mongodb+srv://mih777:mih777@cluster0.6ty8z.mongodb.net/my_db?retryWrites=true&w=majority',
   jwt: 'dev-jwt'
   
 }
