@@ -10,6 +10,7 @@ const ToDoRouter = require('./routes/todo')
 const CategoryRouter = require('./routes/mytodos/mytodoRoutes')
 const MyTodoRouter = require('./routes/mytodos/mytodoRoutes')
 const DebtRouter = require('./routes/debt-route/debt-route')
+const CustomerRouter = require('./routes/customers/customer')
 
 const app = express()
 
@@ -33,6 +34,7 @@ app.use(bodyParser.json())
 
 app.use('/api/auth', authRoutes)
 app.use('/api/products', ProductRouter)
+app.use('/api/customer', CustomerRouter)
 app.use('/api/graph', GraphRouter)
 app.use('/api/todos', ToDoRouter)
 app.use('/api/debt', DebtRouter)

@@ -1,7 +1,7 @@
 const Customer = require('../../models/customers/Customer')
 
 
-module.exports.create = async function(req, res) {
+module.exports.createCustomer = async function(req, res) {
     const customer = new Customer({
       name: req.body.name,
       email: req.body.phone,
@@ -18,7 +18,7 @@ module.exports.create = async function(req, res) {
 } 
 
 
-module.exports.getAllProducts = async (req, res) => {
+module.exports.getAllCustomers = async (req, res) => {
 
 
     await Customer.find({}, (err, customers) => {   
@@ -31,4 +31,15 @@ module.exports.getAllProducts = async (req, res) => {
 
     }).sort({ _id: -1 })
 
+}
+
+module.exports.deleteCustomer = async (req, res) => {
+    await Customer.deleteOne({ _id: req.params.id }, (err, todo) => {
+        if(err){
+            res.send(err);
+        }
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        res.setHeader('Access-Control-Allow-Headers', 'origin, content-type, accept')
+        res.json({ message: 'Successfully deleted customer!'})
+    })
 }
