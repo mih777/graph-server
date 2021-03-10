@@ -2,20 +2,33 @@ const Customer = require('../../models/customers/Customer')
 
 
 module.exports.createCustomer = async function(req, res) {
-    const customer = new Customer({
-      name: req.body.name,
-      email: req.body.phone,
-      phone: req.body.phone,
-      
-    })
-  
-    try {
-      await customer.save()
-      res.status(201).json({message: 'Customer created !',customer})
-    } catch (e) {
-      errorHandler(res, e)
+
+    const candidate = await Customer.findOne({email: req.body.email})
+
+    if (candidate) {
+        // Пользователь существует, нужно отправить ошибку
+        res.status(409).json({
+        message: 'Такой email уже занят. Попробуйте другой.'
+        })
+    }else{
+        const customer = new Customer({
+            name: req.body.name,
+            email: req.body.email,
+            phone: req.body.phone,
+            
+          })
+        
+          try {
+            await customer.save()
+            res.status(201).json({message: 'Customer created !',customer})
+          } catch (e) {
+            errorHandler(res, e)
+          }
     }
+
+    
 } 
+
 
 
 module.exports.getAllCustomers = async (req, res) => {
