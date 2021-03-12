@@ -144,12 +144,16 @@ module.exports.deleteTodo = async (req, res) => {
 }
 
 module.exports.updateTodo = async(req, res) => {
+    //const { title, category, description, completed } = req.body
     const updated = {
-        title: req.body.title,
-        category: req.body.category,
-        description: req.body.description,
-        completed: req.body.completed
+        ...req.body
     }
+    // const updated = {
+    //     title: req.body.title,
+    //     category: req.body.category,
+    //     description: req.body.description,
+    //     completed: req.body.completed
+    // }
 
     try {
     const todo = await Todo.findOneAndUpdate(
