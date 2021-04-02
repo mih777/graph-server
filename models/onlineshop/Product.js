@@ -4,21 +4,28 @@ const Schema = mongoose.Schema
 const productSchema = new Schema({
 
     category: {
-        type: String 
+        type: String,
+        //required: 'Enter a type of product'
     },
     title: {
         type: String,
-        required: 'Enter a name of todo'
+        //required: 'Enter a name of product'
     },    
     imageSrc: {
         type: String,
-        default: ''
+        //required: 'add an image of product'
     },
     info: {
-        type: String
+        type: String,
+        //required: 'Enter an info of product'
+    },
+    description: {
+        type: String,
+        //required: 'Enter an info of product'
     },
     price: {
-        type: String
+        type: String,
+        //required: 'Enter a price of product'
     },
     created_date: {
         type: Date,

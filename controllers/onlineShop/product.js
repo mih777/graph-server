@@ -1,4 +1,5 @@
 const Product = require('../../models/onlineshop/Product')
+const errorHandler = require('../../utils/errorHandler')
 
 
 module.exports.create = async function(req, res) {
@@ -6,6 +7,7 @@ module.exports.create = async function(req, res) {
       title: req.body.title,
       category: req.body.category,
       info: req.body.info,
+      description: req.body.description,
       price: req.body.price,
       imageSrc: req.file ? req.file.path : ''
     })
@@ -24,6 +26,7 @@ module.exports.updateProduct = async(req, res) => {
         title: req.body.title,
         photo: req.body.photo,
         info: req.body.info,
+        description: req.body.description,
         price: req.body.price,
         imageSrc: req.file ? req.file.path : ''
     }

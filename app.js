@@ -1,6 +1,5 @@
 const express = require('express')
 const mongoose = require('mongoose')
-const bodyParser = require('body-parser')
 const cors = require('cors')
 const keys = require('./config/keys')
 const authRoutes = require('./routes/onlineshop/auth')
@@ -28,11 +27,8 @@ mongoose.set('useFindAndModify', false)
 
 app.use(cors())
 app.use('/uploads', express.static('uploads'))
-// app.use(bodyParser.urlencoded({extended: true}))
-// app.use(bodyParser.json())
-
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+app.use(express.urlencoded({extended: true}))
+app.use(express.json())
 
 
 app.use('/api/auth', authRoutes)

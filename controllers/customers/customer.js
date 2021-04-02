@@ -11,16 +11,11 @@ module.exports.createCustomer = async function(req, res) {
         message: 'Такой email уже занят. Попробуйте другой.'
         })
     }else{
-        const customer = new Customer({
-            name: req.body.name,
-            email: req.body.email,
-            phone: req.body.phone,
-            
-          })
+        const customer = new Customer({ ...req.body })
         
           try {
             await customer.save()
-            res.status(201).json({message: 'Customer created !',customer})
+            res.status(201).json({message: 'Customer created77777777 !',customer})
           } catch (e) {
             errorHandler(res, e)
           }
